@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>くじ回数計算アプリ</title>
+  <style>
+    body {
+      font-family: "Yu Gothic", "Meiryo", sans-serif;
+      background-color: #fff0f5;
+      padding: 2em;
+      text-align: center;
+      color: #444;
+    }
+    h1 {
+      color: #d06092;
+      margin-bottom: 1em;
+    }
+    label {
+      font-size: 1.1em;
+      display: block;
+      margin-bottom: 0.5em;
+    }
+    input {
+      padding: 0.5em;
+      width: 120px;
+      border: 2px solid #f7b5cd;
+      border-radius: 10px;
+      text-align: center;
+      background-color: #fff;
+    }
+    button {
+      background-color: #f7b5cd;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      color: #fff;
+      cursor: pointer;
+      margin: 0.5em;
+    }
+    button:hover {
+      background-color: #f28eb1;
+    }
+    .result {
+      margin-top: 2em;
+      font-size: 1.4em;
+      line-height: 1.8em;
+      color: #c44b78;
+    }
+  </style>
+</head>
+<body>
+  <h1>くじ回数計算アプリ</h1>
+  <label>抽選券：<input type="number" id="ticket" value=""></label>
+  <label>補助券：<input type="number" id="subTicket" value=""></label>
+  <button onclick="calculate()">計算する</button>
+  <button onclick="clearFields()">クリア</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculate() {
+      const ticket = parseInt(document.getElementById('ticket').value) || 0;
+      const subTicket = parseInt(document.getElementById('subTicket').value) || 0;
+
+      const mainDraws = ticket;
+      const bonusDraws = Math.floor(subTicket / 6);
+      const remaining = subTicket % 6;
+
+      const total = mainDraws + bonusDraws;
+
+      document.getElementById('result').innerHTML =
+        `くじ回数：${total}回<br>余り補助券：${remaining}枚`;
+    }
+
+    function clearFields() {
+      document.getElementById('ticket').value = "";
+      document.getElementById('subTicket').value = "";
+      document.getElementById('result').innerHTML = "";
+    }
+  </script>
+</body>
+</html>
